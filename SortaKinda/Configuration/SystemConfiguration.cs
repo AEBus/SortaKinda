@@ -31,6 +31,8 @@ public class SystemConfiguration {
 	public bool EnableUnassignedOrdering = false;
 	public OrderingRuleBase UnassignedSlotOrdering = new AlphabeticalOrdering();
 
+	public bool IsDebugMode = false;
+
 	public List<RuleSet> RuleSets = [];
 	public InventoryType LastSelectedInventory = InventoryType.Inventory1;
 

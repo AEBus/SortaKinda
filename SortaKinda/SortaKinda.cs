@@ -61,7 +61,10 @@ public sealed class SortaKinda : IAsyncDalamudPlugin {
 
 		if (IClientState.Get().IsLoggedIn) {
 			OnLogin();
-			System.ConfigWindow.DebugOpen();
+
+			if (System.SystemConfiguration.IsDebugMode) {
+				System.ConfigWindow.DebugOpen();
+			}
 		}
 
 		return Task.CompletedTask;
@@ -111,6 +114,17 @@ public sealed class SortaKinda : IAsyncDalamudPlugin {
 			case [ "" ] or []:
 				System.ConfigWindow.Toggle();
 				return;
+
+			case ["debug"]:
+				System.SystemConfiguration.IsDebugMode = !System.SystemConfiguration.IsDebugMode;
+				IChatGui.Get().Print($"Debug mode is now {(System.SystemConfiguration.IsDebugMode ? "Enabled" : "Disabled")}", "VanillaPlus");
+				IPluginLog.Get().Info($"Debug mode is now {(System.SystemConfiguration.IsDebugMode ? "Enabled" : "Disabled")}");
+				Task.Run(() => System.SystemConfiguration.Save(false));
+
+				if (!System.ConfigWindow.IsOpen) {
+					System.ConfigWindow.IsOpen = true;
+				}
+				break;
 
 			case [ "sort" ]:
 				System.SortingController.LaunchSortTask();
