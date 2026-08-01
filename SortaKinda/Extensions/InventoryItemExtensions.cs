@@ -63,6 +63,9 @@ public static unsafe class InventoryItemExtensions {
 		public bool IsArmor
 			=> item.UiCategory.RowId is 34 or 35 or 36 or 37 or 38 or 40 or 41 or 42 or 43;
 
+		public bool IncludesJob(uint jobId)
+			=> item.GetItemProperty(item => item.ClassJobCategory).Value.IncludesJob(jobId);
+
 		private T GetItemProperty<T>(Func<Item, T> propertyGetter) {
 			if (!ItemUtil.IsNormalItem(item.ItemId)) throw new Exception("Invalid Item Type");
 
