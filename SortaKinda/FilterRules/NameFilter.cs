@@ -52,7 +52,7 @@ public class NameFilter : FilteringRuleBase {
 					addButtonEnabled = false;
 				}
 				else {
-					_ = new Regex(newRegexString);
+					_ = new Regex(newRegexString, RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 					addButtonEnabled = true;
 				}
 			}

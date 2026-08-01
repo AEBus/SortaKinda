@@ -36,14 +36,14 @@ public class ItemUiCategoryFilter : FilteringRuleBase {
 		if (ImGui.InputTextWithHint("##SearchBar", "Search . . . ", ref searchString, flags: ImGuiInputTextFlags.AutoSelectAll)) {
 			try {
 				if (searchString is "") {
-					searchRegex = new Regex(string.Empty);
+					searchRegex = new Regex(string.Empty, RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 				}
 				else {
-					searchRegex = new Regex(searchString);
+					searchRegex = new Regex(searchString, RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 				}
 			}
 			catch (ArgumentException) {
-				searchRegex = new Regex(string.Empty);
+				searchRegex = new Regex(string.Empty, RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
 			}
 		}
 	}
