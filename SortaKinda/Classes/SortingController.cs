@@ -348,7 +348,7 @@ public unsafe class SortingController :  IDisposable {
 
 			// Trigger AgentInventory Update to update various UI's.
 			// Non-networked.
-			IFramework.Get().RunOnFrameworkThread(() => {
+			IFramework.Get().Run(() => {
 				RaptureAtkModule.Instance()->AgentUpdateFlag |= RaptureAtkModule.AgentUpdateFlags.InventoryUpdate;
 				ItemOrderModule.Instance()->HasChanges = true;
 			});
